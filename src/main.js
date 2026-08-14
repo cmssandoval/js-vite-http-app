@@ -1,4 +1,6 @@
+import { PokemonApp } from './pokemon/pokemon-app';
 import './style.css';
+
 
 document.querySelector('#app').innerHTML = `
 <main>
@@ -6,3 +8,5 @@ document.querySelector('#app').innerHTML = `
     <section class="information-card"></section>
 </main>
 `;
+
+PokemonApp( document.querySelector('.information-card') );
