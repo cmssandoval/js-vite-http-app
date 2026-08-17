@@ -30,15 +30,17 @@ export const PokemonApp = async ( element ) => {
     element.appendChild(previousButton);
 
     //* Listeners de los botones
-    nextButton.addEventListener('click', () => {
-        getPokemonById( pokemonIdState + 1 )
-            .then( renderPokemon, pokemonIdState++ );
+    nextButton.addEventListener('click', async () => {
+        loadingParagraph.textContent = 'Cargando...';
+        pokemonIdState++;
+        renderPokemon( await getPokemonById( pokemonIdState ) );
     });
 
-    previousButton.addEventListener('click', () => {
+    previousButton.addEventListener('click', async () => {
         if ( pokemonIdState < 2 ) return;
-        getPokemonById( pokemonIdState - 1 )
-            .then( renderPokemon, pokemonIdState-- );
+        loadingParagraph.textContent = 'Cargando...';
+        pokemonIdState--;
+        renderPokemon( await getPokemonById( pokemonIdState ) );
     });
     
     //* Renderizar el pokemon
@@ -46,7 +48,7 @@ export const PokemonApp = async ( element ) => {
         pokemonImage.src = pokemon.image;
         loadingParagraph.textContent = `
             Pokemon #${ pokemon.id } - ${ pokemon.name }`;
-    }
+    };
 
     //* Hacer la petición inicial
     renderPokemon( await getPokemonById( pokemonIdState ) );
