@@ -1,4 +1,5 @@
 
+const pokemonCache = new Map();
 
 /**
  * Función para obtener un pokemon por su ID.
@@ -7,6 +8,10 @@
  */
 export const getPokemonById = async ( id ) => {
 
+    if ( pokemonCache.has(id) ) {
+        // console.log('Pokemon mostrado desde caché');
+        return pokemonCache.get(id);
+    }
 
     const pokeapiURL = `https://pokeapi.co/api/v2/pokemon/`;
     const response = await fetch( pokeapiURL + id );
@@ -19,7 +24,7 @@ export const getPokemonById = async ( id ) => {
         image: data.sprites.front_default,
     };
     
-    console.log({ pokemonData });
+    pokemonCache.set(id, pokemonData);
     return pokemonData;
 
     //* Otra forma con un manejo de excepciones básico
