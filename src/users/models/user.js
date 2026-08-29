@@ -2,7 +2,7 @@ export class User {
 
     /**
      * 
-     * @param {Object} userData 
+     * @param {Like<User>} userData 
      */
     constructor ({ id, isActive, balance, avatar, firstName, lastName, gender }) {
         this.id         = id;
