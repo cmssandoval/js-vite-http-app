@@ -1,3 +1,5 @@
+import { User } from "../models/user.js";
+
 /**
  * 
  * @param {Like<User>} localhostUser 
@@ -15,7 +17,7 @@ export const localhostUserToModel = ( localhostUser ) => {
         last_name,
     } = localhostUser;
 
-    return new User({
+    return new User ({
         avatar,
         balance,
         firstName: first_name,
