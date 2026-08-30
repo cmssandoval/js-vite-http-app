@@ -49,7 +49,7 @@ const createUser = async ( user ) => {
  * 
  * @param {Like<User>} user 
  */
-const updateUser = async ( user ) => {
+export const updateUser = async ( user ) => {
 
     const url = `${ import.meta.env.VITE_BASE_URL }/users/${ user.id }`;
     const response = await fetch(url, {
