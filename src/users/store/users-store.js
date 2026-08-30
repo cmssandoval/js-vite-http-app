@@ -1,3 +1,4 @@
+import { User } from '../models/user.js';
 import { loadUsersByPage } from '../use-cases/load-users-by-page.js';
 
 const state = {
@@ -25,8 +26,23 @@ const loadPreviousPage = async () => {
     state.users = users;
 };
 
-const onUserChange = () => {
-    throw new Error('Not implemented');
+/**
+ * @param {User} user
+ */
+const onUserChange = ( updatedUser ) => {
+    let wasFound = false;
+    
+    state.users = state.users.map( user => {
+        if ( user.id === updatedUser.id ) {
+            wasFound = true
+            return updatedUser;
+        }
+        return user;
+    });
+
+    if ( state.length < 10 && !wasFound ) {
+        state.users.push( updatedUser );
+    }
 };
 
 const reloadPage = async () => {
